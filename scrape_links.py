@@ -1,7 +1,7 @@
 import requests, bs4, os, re
 
 
-regex = re.compile(r"(.*)(/.*)$")
+regex = re.compile(r"(.*/\w+)&.*$")
 
 search_query = "https://www.google.com/search?q="
 
@@ -14,6 +14,7 @@ for folder in os.listdir():
         for i in links:
             if i['href'].startswith("/url?q=https://codeforces.com"):
                 mo = regex.search(i['href'])
+                print(mo.group(1))
                 link = mo.group(1).lstrip("/url?q=")
                 # print(mo.group(1).lstrip("/url?q="))
                 f = open(folder+"/"+folder+".txt", "w")
